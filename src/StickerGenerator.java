@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 
 public class StickerGenerator {
 
-	public void create(InputStream inputStream, String fileName, String description) throws Exception {
+	public void create(InputStream inputStream, String fileName) throws Exception {
 		
 		//leitura da imagem
 		
@@ -39,7 +39,7 @@ public class StickerGenerator {
 		graphics.setFont(font);
 		
 		//escrever uma frase na nova imagem
-		graphics.drawString(description, 200, newHeight - 150);
+		graphics.drawString(fileName, 200, newHeight - 150);
 		
 		//escrever a nova imagem em um arquivo
 		ImageIO.write(newImage, "png", new File(fileName));
