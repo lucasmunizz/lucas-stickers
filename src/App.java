@@ -1,4 +1,6 @@
+import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
@@ -22,15 +24,27 @@ public class App {
 		
 		
 		var parser = new JsonParser();
-		List<Map<String, String>> listaDeFilmes = parser.parse(body);  //lista -> map, string da chave, string do valor
+		List<Map<String, String>> filmList = parser.parse(body);  //lista -> map, string da chave, string do valor
 		//System.out.println(listaDeFilmes.get(0));
 		
 		
 		
 		//exibir e manipular os dados que a gente quiser
 		
-		for (Map<String, String> filme : listaDeFilmes) {
-			System.out.println(filme.get("title"));
+		StickerGenerator generator = new StickerGenerator();
+		
+		for (Map<String, String> film : filmList) {
+			
+			String filmUrl = film.get("image");
+			String title = film.get("title");
+			String fileName = "saida/" + title + ".png";
+			String description = title.toUpperCase() + " (" + film.get("year") + ")";
+			
+			InputStream inputStream = new URL(filmUrl).openStream();
+			
+			generator.create(inputStream, fileName, description);
+			
+			System.out.println(film.get("title"));
             System.out.println();
 
 		}

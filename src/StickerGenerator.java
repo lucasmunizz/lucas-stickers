@@ -3,17 +3,21 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
 
 public class StickerGenerator {
 
-	public void create() throws Exception {
+	public void create(InputStream inputStream, String fileName, String description) throws Exception {
 		
 		//leitura da imagem
-			
-		BufferedImage originalImage = ImageIO.read(new File("entrada/pulp.jpg"));
+		
+		//InputStream inputStream = new URL("https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies_8.jpg")
+		//		.openStream();
+		BufferedImage originalImage = ImageIO.read(inputStream);
 		
 		//cria nova imagem em memória com transparência e com tamanho novo
 		
@@ -35,16 +39,11 @@ public class StickerGenerator {
 		graphics.setFont(font);
 		
 		//escrever uma frase na nova imagem
-		graphics.drawString("PULP FICTION (1995)", 200, newHeight - 150);
+		graphics.drawString(description, 200, newHeight - 150);
 		
 		//escrever a nova imagem em um arquivo
-		ImageIO.write(newImage, "png", new File("saida/sticker.png"));
+		ImageIO.write(newImage, "png", new File(fileName));
 		
-	}
-	
-	public static void main(String[] args) throws Exception {
-		var generator = new StickerGenerator();
-		generator.create();
 	}
 
 }
