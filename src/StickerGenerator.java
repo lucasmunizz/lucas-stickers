@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -26,6 +28,14 @@ public class StickerGenerator {
 		Graphics2D graphics = (Graphics2D) newImage.getGraphics();
 		graphics.drawImage(originalImage, 0, 0, null);
 		
+		
+		//configurar a fonte
+		Font font = new Font(Font.SANS_SERIF, Font.BOLD, 64);
+		graphics.setColor(Color.YELLOW);
+		graphics.setFont(font);
+		
+		//escrever uma frase na nova imagem
+		graphics.drawString("PULP FICTION (1995)", 200, newHeight - 150);
 		
 		//escrever a nova imagem em um arquivo
 		ImageIO.write(newImage, "png", new File("saida/sticker.png"));
