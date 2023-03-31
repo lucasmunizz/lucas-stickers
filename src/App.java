@@ -11,9 +11,9 @@ public class App {
 		// TODO Auto-generated method stub
 		
 		//fazer uma conexão http e buscar os 250 filmes
-		String poke = "https://pokeapi.co/api/v2/pokemon/1";
+		//String poke = "https://pokeapi.co/api/v2/pokemon/1";
 		String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java-2-api/main/TopMovies.json";
-		URI endereco = URI.create(poke); //criar uma URI
+		URI endereco = URI.create(url); //criar uma URI
 		HttpClient client = HttpClient.newHttpClient();
 		HttpRequest request = HttpRequest.newBuilder(endereco).GET().build(); //buscar dados de uma url
 		var response = client.send(request, BodyHandlers.ofString());
@@ -30,12 +30,10 @@ public class App {
 		//exibir e manipular os dados que a gente quiser
 		
 		for (Map<String, String> filme : listaDeFilmes) {
-			System.out.println(filme.get("name"));
+			System.out.println(filme.get("title"));
             System.out.println();
 
 		}
-		
-		System.out.println(listaDeFilmes.size());
 		
 	}
 
